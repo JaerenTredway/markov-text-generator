@@ -42,7 +42,7 @@ public class MarkovTextGenerator {
         } catch (Exception ex1) {
             System.out.println("Unable to open file.");
             ex1.printStackTrace();
-            throw new Exception("Example exception message goes here.");
+            throw new Exception("It got this far.");
             //System.exit(1); unreachable statement
         }
 
@@ -96,8 +96,8 @@ public class MarkovTextGenerator {
                                                 ArrayList<String> words) {
 
         ArrayList<NGram> nGrams = new ArrayList<>();
-    	
-    	for (int i = 0; i < words.size() - n; i++) {
+
+        for (int i = 0; i < words.size() - n; i++) {
             NGram temp = new NGram( );  // empty NGram.
             for (int j = 0; j < n; j++) {   // build up temp into the next n-gram
                 temp.lengthen(words.get(i+j));
@@ -114,16 +114,16 @@ public class MarkovTextGenerator {
     private static HashMap<NGram, TransitionRule> makeHashMap (ArrayList<NGram> nGrams) {
         HashMap<NGram, TransitionRule> map = new HashMap<>();
         for (int i = 0; i < nGrams.size()-1; i++) {
-        	
-        	NGram key = nGrams.get(i);
-			if (map.containsKey(key)) {
-        		TransitionRule val = map.get(key);
-        		val.lengthen(nGrams.get(i+1));
-        	} else {
-            	TransitionRule val = new TransitionRule();
-            	val.lengthen(nGrams.get(i+1));
-        		map.put(key, val);
-        	}
+
+            NGram key = nGrams.get(i);
+            if (map.containsKey(key)) {
+                TransitionRule val = map.get(key);
+                val.lengthen(nGrams.get(i+1));
+            } else {
+                TransitionRule val = new TransitionRule();
+                val.lengthen(nGrams.get(i+1));
+                map.put(key, val);
+            }
         }
         return map;
     }
@@ -143,12 +143,10 @@ public class MarkovTextGenerator {
         ArrayList<String> words = readTextFile(args[2]);
 
         ArrayList<NGram> nGrams = makeNGrams(n, words);
-        //test output of the ArrayList of NGrams:
-        for (int i = 0; i < 5; i++) {
-            System.out.println("NGram " + i + ": " + nGrams.get(i));
-        }
+
         HashMap<NGram, TransitionRule> map = makeHashMap(nGrams);
-        System.out.println(map);
+        System.out.println(map.toString());
     }//END main()
 
 }//END class MarkovTextGenerator;
+
