@@ -17,10 +17,17 @@ import java.util.HashMap;
  */
 public class MarkovTextGenerator {
 
-    //no member variables, no constructor
+    //CLASS VARIABLES: (use static keyword so no instance is required)
+    //the URI or file location for the .txt file:
+    private static String uri ="";
+    //the list of individual words extracted from the text:
+    private static ArrayList<String> words = new ArrayList<>();
 
-    //CLASS METHODS:
 
+    // (no constructor)
+
+
+    //CLASS METHODS SECTION: ************************************************
     //READ TEXT FILE:
     //this method returns an ArrayList with each word extracted from the .txt
     //file passed into it:
@@ -45,23 +52,24 @@ public class MarkovTextGenerator {
         }
 
         //display the file you are extracting data from:
-        System.out.println("Text extracted from " + filename + ":");
+        //System.out.println("Text extracted from " + filename + ":");
 
         //set up storage variables for line, lines, and words:
-        int count = 0;
+        //int count = 0;
         String line;
         ArrayList<String> lines = new ArrayList<>();
-        ArrayList<String> words = new ArrayList<>();
+        //**declared above as a Class variable:
+        //ArrayList<String> words = new ArrayList<>();
 
         //set 'line' equal to the next line of text and report:
         try {
             while ( (line = bufferedReader.readLine()) != null) {
                 // the line of text you are currently reading:
-                System.out.println(count + ": " + line);
-                count++;
+                //System.out.println(count + ": " + line);
+                //count++;
                 lines.add(line);
                 for (String word : line.split("[, :.;]")) {
-                    //regex notes:
+                    //regex notes for future reference:
                     // * operator: match zero or more of preceding regex
                     // + operator: match 1 or more of preceding regex
                     // \ operator: escape character for next char
@@ -80,7 +88,7 @@ public class MarkovTextGenerator {
         System.out.println("line count: " + lines.size());
         System.out.println("word count: " + words.size());
 
-        //print 5 of the individual words:
+        //print 5 of the individual words to test:
         for (int i = 0; i < 5; i++) {
             System.out.println("word " + i + ": " + words.get(i));
         }
@@ -110,59 +118,96 @@ public class MarkovTextGenerator {
         return nGramsList;
     }//END makeNGrams()
 
-    //MAKE HASH MAP:
+    //MAKE HASH MAP and TRANSITION RULES:
     //this method takes the list of NGrams, and uses each NGram as a key to
     //make a HashMap. The value linked to each key is a list of other NGrams
-    //that can be found to follow the key NGram anywhere in the text:
-    private static HashMap<NGram, TransitionRule> makeHashMap (ArrayList<NGram> nGramsList) {
+    //that can be found to follow the key NGram somewhere in the text:
+    private static HashMap<NGram, TransitionRule> makeHashMap
+        (ArrayList<NGram> nGramsList) {
         HashMap<NGram, TransitionRule> map = new HashMap<>();
         for (int i = 0; i < nGramsList.size()-1; i++) {
-
-            NGram key = nGramsList.get(i);
+            final NGram key = nGramsList.get(i);
+            //FIXME: this first if-block never runs:
             if (map.containsKey(key)) {
-                TransitionRule val = map.get(key);
-                val.addNGramToRule(nGramsList.get(i+1));
+                final TransitionRule value = map.get(key);
+                System.out.println("test 1");
+                value.addNGramToRule(nGramsList.get(i+1));
             } else {
-                TransitionRule val = new TransitionRule();
-                val.addNGramToRule(nGramsList.get(i+1));
-                map.put(key, val);
+                final TransitionRule value = new TransitionRule();
+                value.addNGramToRule(nGramsList.get(i+1));
+                map.put(key, value);
+                System.out.println("test 2");
             }
         }
         return map;
     }//END makeHashMap()
 
-    //main method collects 3 command line arguments:
-    //args[0] = n : desired NGram size
-    //args[1] = output gibberishLength
-    //args[2] = .txt file URI
+
+    //MAIN METHOD collects these 3 command line arguments:
+        //args[0] = int         "n" desired NGram size, or "order" of MRTG
+        //args[1] = int         output gibberishLength
+        //args[2] = String      .txt file URI (file location) *note: put text
+            // file or it's directory at the same level as src (sibling)
     public static void main (String[] args) throws Exception{
-        //catch lack of command line arguments:
+    //1. give instructions if there are a lack of command line arguments:
         if (args.length < 3) {
             System.out.println("Three command line arguments required: " +
                     "(int)nGramSize (int)gibberishLength (String)textFileName");
             System.out.println("example of how to run program:");
             System.out.println("java MarkovTextGenerator 2 100 sonnet.text");
         }
-        //get command line arguments and make list of words:
+    //2. get command line args and make a list of all the words in the text:
+        uri = args[2];
         int n = Integer.parseInt(args[0]);
         int gibberishLength = Integer.parseInt(args[1]);
         ArrayList<String> words = readTextFile(args[2]);
-        //make a list of NGram objects from the words:
+
+    //3. make a list of NGram objects from the words:
         ArrayList<NGram> nGramsList = makeNGrams(n, words);
-        //print out the list of NGram objects using my custom toString method:
+
+        //TESTS FOR NGRAM AND NGRAM LIST: **********************************
+        //print out the list of NGram objects using its custom toString method:
         System.out.println("\nNGrams:");
         for (int i = 0; i < nGramsList.size(); i++) {
             System.out.println(i + ": " + nGramsList.get(i).toString());
         }
-        //make the hashmap:
+        //END NGRAM TESTS **************************************************
+
+    //4. make the HashMap and TransitionRules:
         HashMap<NGram, TransitionRule> map = makeHashMap(nGramsList);
+
+        //TESTS FOR THE HASHMAP AND TRANSITION RULE LISTS: *****************
         //print out the list of TransitionRule objects:
         System.out.println("\nTransition Rules:");
-        //System.out.println(Arrays.asList(map));
-        //System.out.println(Collections.singletonList(map));
-        for (Object objectName : map.keySet()) {
-            System.out.print("key: " + objectName );
-            System.out.println(" | value: " + map.get(objectName));
+            //two messy ways to print out the hashmap for future reference:
+            //System.out.println(Arrays.asList(map));
+            //System.out.println(Collections.singletonList(map));
+        //a cleaner way to print out the hashmap:
+        for (Object key : map.keySet()) {
+            System.out.print("key: " + key );
+            System.out.println(" | value: " + map.get(key));
+            TransitionRule poop = map.get(key);
+            System.out.println("t-rule size = " + poop.size());
+        }
+        //END HASHMAP TESTS ************************************************
+
+    //5. produce output:
+        //make sure the requested gibberish is not bigger than the text file:
+        if (gibberishLength > words.size()) {
+            gibberishLength = words.size();
+        }
+        System.out.println("\n\nWELCOME TO MARKOV TEXT GENERATOR");
+        System.out.print("\nThe text file you are using is: ");
+        System.out.println(uri);
+        System.out.println("The MRTG order is: " + n);
+        System.out.println("\nHere is a snippet of the " + gibberishLength +
+                " words of text that you are going to turn into gibberish: ");
+        for (int i = 0; i < gibberishLength; i++) {
+            System.out.print(words.get(i) + " ");
+        }
+        System.out.println("\n");
+        for (int i = 0; i < gibberishLength / n; i++) {
+            System.out.print(words.get(i) + " ");
         }
 
     }//END main()

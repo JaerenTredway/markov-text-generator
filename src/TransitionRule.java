@@ -2,17 +2,17 @@ import java.util.ArrayList;
 
 //each TransitionRule is a list of options of NGrams that can follow its
 //associated key NGram:
-public class TransitionRule {
+public final class TransitionRule {
 
     //MEMBER VARIABLES:
-    //this list stores all the possible follower-NGrams that can be added on
-    //to manufacture gibberish. Each follower-NGram appears after its key
+    //this list stores all the possible follower-NGrams that can be added-on
+    //to manufacture gibberish. Each follower-NGram has appeared after its key
     //NGram somewhere in the text.
-    ArrayList<NGram> followerNGramsList;
+    private final ArrayList<NGram> followerNGramsList;
 
     //CONSTRUCTOR:
-    public TransitionRule( ) {
-        followerNGramsList = new ArrayList<> ();
+    TransitionRule() {
+        this.followerNGramsList = new ArrayList<> ();
     }
 
     //method to add an NGram to the TransitionRule list:
@@ -20,15 +20,19 @@ public class TransitionRule {
         followerNGramsList.add(x);
     }
 
-    //this method overrides the parent toString method:
+    //this method overrides the parent toString method from Object class:
     @Override
     public String toString( ) {
         String rv = "";
         for (NGram n : followerNGramsList) {
-            rv += n.toString() + ", ";
+            rv += n.toString() + " ";
         }
-        //rv += "\n";
         return rv;
     }
 
-}
+    //returns the length of the TransitionRule (length of list of NGrams):
+    public int size() {
+        return followerNGramsList.size();
+    }
+
+}//END class TransitionRule

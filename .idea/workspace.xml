@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ae99e52-ec5e-449e-aaa0-55b2bb0d6e7f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/jaerentredway.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MarkovTextGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MarkovTextGenerator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NGram.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NGram.java" afterDir="false" />
@@ -76,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588361280394</updated>
-      <workItem from="1588361281620" duration="9071000" />
+      <workItem from="1588361281620" duration="21948000" />
     </task>
     <task id="LOCAL-00001" summary="Added files.">
       <created>1588363799125</created>
@@ -85,7 +83,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588363799125</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Built hashmap of NGrams and TransitionRules.">
+      <created>1588372152481</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1588372152481</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,6 +109,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added files." />
+    <MESSAGE value="Built hashmap of NGrams and TransitionRules." />
+    <option name="LAST_COMMIT_MESSAGE" value="Built hashmap of NGrams and TransitionRules." />
   </component>
 </project>
