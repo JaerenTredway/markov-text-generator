@@ -81,7 +81,6 @@ public class MarkovTextGenerator {
     private static ArrayList<String> readTextFile (String uri) throws Exception {
         //pick up and print out the file name (that was input from the command
         //line):
-        String filename = uri;
         //create 3 objects: a File, a FileReader, and a BufferedReader:
         //first declare them outside of try block:
         File file;
@@ -89,7 +88,7 @@ public class MarkovTextGenerator {
         BufferedReader bufferedReader;
         //then assign values inside try/catch block:
         try {
-            file = new File(filename);
+            file = new File(uri);
             fileReader = new FileReader(file);
             bufferedReader = new BufferedReader(fileReader);
         } catch (Exception ex1) {
@@ -114,7 +113,7 @@ public class MarkovTextGenerator {
                 //System.out.println(count + ": " + line);
                 //count++;
                 lines.add(line);
-                for (String word : line.split("[, :.;]")) {
+                for (String word : line.split("[ :;.-]")) {
                     //regex notes for future reference:
                     // * operator: match zero or more of preceding regex
                     // + operator: match 1 or more of preceding regex
@@ -232,15 +231,23 @@ public class MarkovTextGenerator {
     //1. give instructions if there are a lack of command line arguments:
         if (args.length < 3) {
             System.out.println("Three command line arguments required: " +
-                    "(int)nGramSize (int)gibberishLength (String)textFileName");
+                    "(int)NGramSize (int)gibberishLength (String)" +
+                    "textFileName");
+            System.out.println("NGram size (MRTG order must be >= 2");
             System.out.println("example of how to run program:");
-            System.out.println("java MarkovTextGenerator 2 100 sonnet.text");
+            System.out.println("java MarkovTextGenerator 2 100 hamlet.text");
         }
     //2. get command line args and make a list of all the words in the text:
-        uri = args[2];
-        n = Integer.parseInt(args[0]);
+        if (Integer.parseInt(args[0]) >= 2) {
+            n = Integer.parseInt(args[0]);
+        } else {
+            System.out.println("Illegal argument: your first argument NGram " +
+                    "size (the MRTG \"order\") must be >= 2");
+            System.exit(1);
+        }
         gibberishLength = Integer.parseInt(args[1]);
-        ArrayList<String> words = readTextFile(args[2]);
+        uri = args[2];
+        ArrayList<String> words = readTextFile(uri);
 
     //3. make a list of NGram objects from the words:
         ArrayList<NGram> nGramsList = makeNGrams(n, words);
@@ -287,8 +294,8 @@ public class MarkovTextGenerator {
         }
         System.out.println("\n\n*NOTE: The gibberish does not begin until the" +
                 " MRTG reaches the first transition rule that has more than " +
-                "one NGram in it and also selects an NGram other than the " +
-                "first one in the list.");
+                "one NGram in it AND also selects an NGram other than the " +
+                "first one in that TransitionRule.");
         System.out.println("\n*ALSO NOTE: The probability-weighting in this " +
                 "program is integral to the way my TransitionRule objects " +
                 "are built. Each TransitionRule has repeated NGrams every " +

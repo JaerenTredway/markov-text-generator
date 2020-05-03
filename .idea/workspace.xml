@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ae99e52-ec5e-449e-aaa0-55b2bb0d6e7f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/jaerentredway.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/jaerentredway.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MarkovTextGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MarkovTextGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TransitionRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TransitionRule.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,7 +72,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588361280394</updated>
-      <workItem from="1588361281620" duration="38482000" />
+      <workItem from="1588361281620" duration="40525000" />
     </task>
     <task id="LOCAL-00001" summary="Added files.">
       <created>1588363799125</created>
@@ -104,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588459576345</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Finished it.">
+      <created>1588471669939</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1588471669939</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -126,6 +131,7 @@
     <MESSAGE value="Built hashmap of NGrams and TransitionRules." />
     <MESSAGE value="Added main method." />
     <MESSAGE value="Added documentation." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added documentation." />
+    <MESSAGE value="Finished it." />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished it." />
   </component>
 </project>
