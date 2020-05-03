@@ -2,10 +2,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * @author Jaeren William Tredway
@@ -190,29 +187,40 @@ public class MarkovTextGenerator {
     }//END makeHashMap()
 
 
-    //GENERATE RANDOM (WEIGHTED) INDEX:
-    //this takes the length (size) of a TransitionRule (list) and generates an
-    //index at random (weighted by the probability of NGrams appearing in the
-    //list)
-    private int randomGenerator (int listSize) {
-        int index = 0;
-
-        return index;
-    }
-
-
     //MAKE GIBBERISH:
     //this method takes the hashmap and returns a string of nonsense:
-    private static String makeGibberish (HashMap<NGram, TransitionRule> map) {
-        String result = "";
-        //start with first NGram in NGrams list:
+    private static String makeGibberish (HashMap<NGram, TransitionRule> m) {
+        Random rand = new Random();
+        //start with first NGram in nGramsList:
         NGram currentKey = nGramsList.get(0);
-        for (int i = 0; i < gibberishLength / n; i++) {
-            //TODO: get a random NGram value from the previous key
-            //TODO: add a weight for the probability
+        //add *the first word* to the output String:
+        StringBuilder result = new StringBuilder();
+        result.append(currentKey.get(0)).append(" ");
+        //find the next NGram randomly selected from currentKey's linked
+        //TransitionRule and add it to the output String:
+        for (int i = 0; i < gibberishLength-1; i++) {
+            //get the current TransitionRule:
+            TransitionRule currentRule = map.get(currentKey);
+            //randomly pick an NGram from that TransitionRule:
+            int bound;
+            int index;
+            int ruleLength = currentRule.size();
+            if (ruleLength == 1) {
+                bound = 1; //this only serves to prevent a zero bound
+            } else {
+                bound = ruleLength-1;
+            }
+            if (n == 1) {
+                index = 0;
+            } else {
+                index = rand.nextInt(bound);
+            }
+            NGram nextKey = currentRule.get(index);
+            result.append(nextKey.get(0)).append(" ");
+            currentKey = nextKey;
         }
-        return result;
-    }
+        return result.toString();
+    }//END makeGibberish();
 
 
     //MAIN METHOD collects these 3 command line arguments:
@@ -268,19 +276,28 @@ public class MarkovTextGenerator {
         if (gibberishLength > words.size()) {
             gibberishLength = words.size();
         }
-        System.out.println("\nWELCOME TO MARKOV TEXT GENERATOR");
+        System.out.println("\nWELCOME TO JAEREN'S MARKOV TEXT GENERATOR");
         System.out.print("\nThe text file you are using is: ");
         System.out.println(uri);
         System.out.println("The MRTG order is: " + n);
-        System.out.println("\nHere is a snippet of the " + gibberishLength +
-                " words of text that you are going to turn into gibberish: ");
+        System.out.println("\nHere is the start of the not-scrambled (" + uri +
+                ") that you are going to turn into gibberish: ");
         for (int i = 0; i < gibberishLength; i++) {
             System.out.print(words.get(i) + " ");
         }
-        System.out.println("\n\nAnd here is your " + gibberishLength +
+        System.out.println("\n\n*NOTE: The gibberish does not begin until the" +
+                " MRTG reaches the first transition rule that has more than " +
+                "one NGram in it and also selects an NGram other than the " +
+                "first one in the list.");
+        System.out.println("\n*ALSO NOTE: The probability-weighting in this " +
+                "program is integral to the way my TransitionRule objects " +
+                "are built. Each TransitionRule has repeated NGrams every " +
+                "time the same NGram is found in the text. So the probability" +
+                " of selecting a particular NGram from the list corresponds " +
+                "to the frequency of that NGram in the text.");
+        System.out.println("\nAnd here is your " + gibberishLength +
                 " words of gibberish: ");
         System.out.println(makeGibberish(map));
-
     }//END main()
 
 }//END class MarkovTextGenerator;

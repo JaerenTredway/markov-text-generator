@@ -30,9 +30,31 @@ public final class TransitionRule {
         return rv;
     }
 
+    //this overrides Object class hashCode() to prevent HashMap malfunction:
+    @Override
+    public int hashCode( ) {
+        int hash1 = followerNGramsList.get(0).hashCode();
+        int hash2 = followerNGramsList.get(1).hashCode();
+        return hash1 + hash2;
+    }
+
+    //this overrides Object class hashCode() to prevent HashMap malfunction:
+    @Override
+    public boolean equals( Object o) {
+        if (o == null) return false;
+        if (!(o instanceof TransitionRule)) return false;
+        TransitionRule b = (TransitionRule) o;
+        return (followerNGramsList.get(0).equals(b.followerNGramsList.get(0)) &&
+                followerNGramsList.get(1).equals(b.followerNGramsList.get(1)));
+    }
+
     //returns the length of the TransitionRule (length of list of NGrams):
     public int size() {
         return followerNGramsList.size();
+    }
+
+    public NGram get(int i) {
+        return followerNGramsList.get(i);
     }
 
 }//END class TransitionRule

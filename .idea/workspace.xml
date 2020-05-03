@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ae99e52-ec5e-449e-aaa0-55b2bb0d6e7f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dictionaries/jaerentredway.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dictionaries/jaerentredway.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MarkovTextGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MarkovTextGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TransitionRule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TransitionRule.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,7 +53,7 @@
     <configuration name="MarkovTextGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="MarkovTextGenerator" />
       <module name="markov-text-generator" />
-      <option name="PROGRAM_PARAMETERS" value="2 100 text-files/sonnet.txt" />
+      <option name="PROGRAM_PARAMETERS" value="2 50 text-files/hamlet.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -72,7 +74,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1588361280394</updated>
-      <workItem from="1588361281620" duration="27580000" />
+      <workItem from="1588361281620" duration="38482000" />
     </task>
     <task id="LOCAL-00001" summary="Added files.">
       <created>1588363799125</created>
@@ -95,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588453914598</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added documentation.">
+      <created>1588459576345</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1588459576345</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -116,6 +125,7 @@
     <MESSAGE value="Added files." />
     <MESSAGE value="Built hashmap of NGrams and TransitionRules." />
     <MESSAGE value="Added main method." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added main method." />
+    <MESSAGE value="Added documentation." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added documentation." />
   </component>
 </project>
