@@ -46,11 +46,12 @@ import java.util.*;
  *      values:     each value is a list of all the NGrams that are found to
  *                  follow that key anywhere in the text. These lists are
  *                  called TransitionRules.
- * 5. It then builds an output String that is made of NGrams. It uses the
- *      probability of an NGram appearing in the previous Ngram's
- *      TransitionRule to weight a random selection from that
- *      TransitionRule, an unneccessary overcomplication of an already
- *      complex process.
+ * 5. It then builds an output String that is made of NGrams. The
+ *      probablility of an NGram being chosen from the TransistionRule
+ *      corresponds to the frequency of that NGram appearing in the text,
+ *      because the TransitionRules keep unlimited duplicate NGrams that are
+ *      collected every time that NGram is found in the text after the key
+ *      NGram.
  * 6. And lastly it displays the output of gibberish.
  */
 public class MarkovTextGenerator {
