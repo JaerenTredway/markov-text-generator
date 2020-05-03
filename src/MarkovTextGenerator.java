@@ -44,8 +44,8 @@ import java.util.*;
  * 4. Then it makes a hashmap called "map" that has these keys/values:
  *      keys:       each NGram becomes a key.
  *      values:     each value is a list of all the NGrams that are found to
- *                  follow that key anywhere in the text. These lists are
- *                  called TransitionRules.
+ *                  follow that key anywhere in the text, including duplicates.
+ *                  These lists are called TransitionRules.
  * 5. It then builds an output String that is made of NGrams. The
  *      probablility of an NGram being chosen from the TransistionRule
  *      corresponds to the frequency of that NGram appearing in the text,
@@ -289,7 +289,7 @@ public class MarkovTextGenerator {
         System.out.println(uri);
         System.out.println("The MRTG order is: " + n);
         System.out.println("\nHere is the start of the not-scrambled (" + uri +
-                ") that you are going to turn into gibberish: ");
+                ") file that you are going to turn into gibberish: ");
         for (int i = 0; i < gibberishLength; i++) {
             System.out.print(words.get(i) + " ");
         }
